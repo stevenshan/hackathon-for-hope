@@ -5,7 +5,7 @@ import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 
 export default class CalendarScreen extends React.Component {
   static navigationOptions = {
-    title: "Calendar"
+    title: 'Calendar',
   };
 
   render() {

@@ -8,7 +8,6 @@ import CameraScreen from '../screens/CameraScreen';
 import PrescriptionScreen from '../screens/PrescriptionScreen';
 import InstructionScreen from '../screens/InstructionScreen';
 import CalendarScreen from '../screens/CalendarScreen';
-import AchievementScreen from '../screens/AchievementScreen';
 
 
 const HomeStack = createStackNavigator({
@@ -89,25 +88,10 @@ InstructionStack.navigationOptions = {
   ),
 };
 
-const AchievementStack = createStackNavigator({
-  Achievment: AchievementScreen,
-});
-
-AchievementStack.navigationOptions = {
-  tabBarLabel: 'Achievements',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
-    />
-  ),
-};
-
 export default createBottomTabNavigator({
   HomeStack,
   CameraStack,
   PrescriptionStack,
   InstructionStack,
   CalendarStack,
-  AchievementStack,
 });

@@ -8,9 +8,9 @@ export default class CameraScreen extends React.Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
   };
-
+  
   static navigationOptions = {
-    title: 'Camera',
+    header: null,
   };
 
   async componentWillMount() {
