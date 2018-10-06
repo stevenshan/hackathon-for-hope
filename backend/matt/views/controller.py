@@ -42,27 +42,32 @@ def __user():
     _medicines = []
 
     today = (datetime.datetime.today().weekday() + 1) % 7
+    inc = -1
 
-    for x in medicines:
-        days = str(x["days"]).split(",")
-        if str(today) in days:
-            dt = datetime.datetime.today()
-            hours = str(x["times"]).split(",")
-            for hour in hours:
-                dt = dt.replace(minute=0, second=0,microsecond=0,hour=int(hour))
+    for i in range(7):
+        inc += 1
+        today = (today + 1) % 7
+        for x in medicines:
+            days = str(x["days"]).split(",")
+            if str(today) in days:
+                dt = datetime.datetime.today()
+                dt = dt.replace(day=dt.day + inc)
+                hours = str(x["times"]).split(",")
+                for hour in hours:
+                    dt = dt.replace(minute=0, second=0,microsecond=0,hour=int(hour))
 
-                start = dt.strftime("%Y-%m-%d %H:%M:%S") 
-                dt = dt.replace(minute=10)
-                end = dt.strftime("%Y-%m-%d %H:%M:%S") 
+                    start = dt.strftime("%Y-%m-%d %H:%M:%S") 
+                    dt = dt.replace(minute=10)
+                    end = dt.strftime("%Y-%m-%d %H:%M:%S") 
 
-                result = {
-                    "start": start,
-                    "end": end,
-                    "title": x["name"],
-                    "summary": x["instruction"],
-                }
+                    result = {
+                        "start": start,
+                        "end": end,
+                        "title": x["name"],
+                        "summary": x["instruction"],
+                    }
 
-                _medicines.append(result)
+                    _medicines.append(result)
 
     return jsonify(_medicines)
 
