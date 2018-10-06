@@ -21,9 +21,26 @@
     </head>
     <body>
         <header>
+            <i id="header-dropdown" class="material-icons">keyboard_arrow_down</i>
             <div id="patient-name">
                 <span id="patient-first-name">{{ firstname }}</span>
                 <span id="patient-last-name">{{ lastname }}</span>
+                <span class="missed-count"><b>2</b> medications missed last week</span>
+            </div>
+            <div id="patient-name" style="color: #54843b">
+                <span id="patient-first-name">Brandon</span>
+                <span id="patient-last-name">Pek</span>
+                <span class="ontrack"><i class="material-icons">check</i></span>
+            </div>
+            <div id="patient-name">
+                <span id="patient-first-name">Rebecca</span>
+                <span id="patient-last-name">Finn</span>
+                <span class="missed-count"><b>4</b> medications missed last week</span>
+            </div>
+            <div id="patient-name" style="color: #54843b">
+                <span id="patient-first-name">Manuel</span>
+                <span id="patient-last-name">Lang</span>
+                <span class="ontrack"><i class="material-icons">check</i></span>
             </div>
         </header>
 

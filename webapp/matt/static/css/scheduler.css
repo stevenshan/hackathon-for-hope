@@ -7,12 +7,33 @@ body {
 }
 
 header {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 2;
     background-color: #fafafa;
     height: 45px;
     color: #f92e31;
     border-bottom: 1px solid #e5aca9;
     padding: 0px 20px;
+    padding-left: 50px;
     letter-spacing: -1px;
+    overflow: hidden;
+}
+
+header.active {
+    height: initial;
+}
+
+#header-dropdown {
+    position: absolute;
+    left: 20px;
+    display: inline-block;
+    float: left;
+    margin-top: 2px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 20;
 }
 
 header > * {
@@ -23,8 +44,32 @@ header > * {
     font-size: 22px;
 }
 
+header > *:last-child {
+    margin-bottom: 10px;
+}
+
 header #patient-name #patient-first-name {
     font-weight: 600;
+}
+
+header #patient-name .missed-count {
+    position: absolute;
+    left: 15%;
+    font-size: 14px;
+}
+
+header #patient-name .ontrack {
+    position: absolute;
+    left: 15%;
+}
+
+header #patient-name .ontrack i {
+    font-size: 18px;
+}
+
+header #patient-name .missed-count b {
+    font-size: 16px;
+    padding-right: 3px;
 }
 
 #panes {

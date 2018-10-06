@@ -5,9 +5,11 @@ var currentlyUpdating = null;
 var deleteFunc = null;
 var countPrescriptions = 0;
 var calendar = [];
+var menuVisible = false;
 // var COLORS = ["#FFFC00", "#00c300", "#ff6600", "#1ab7ea", "#ff0084", "#02b875", "#131418", "#3b5999", "#eb4924"];
 
 $(function(){
+
     showPrescriptionList();
 
     var hourRow = $('<div class="row hour"></div>');
@@ -66,6 +68,25 @@ $(function(){
         var prescription = PRESCRIPTIONS["medicine"][i];
         addPrescription(prescription);
     }
+
+    var toggleMenu = (e) => {
+        menuVisible = !menuVisible;
+        $("header").toggleClass("active", menuVisible);
+        $("#header-dropdown").html(!menuVisible ?
+            "keyboard_arrow_down" : "keyboard_arrow_up")
+        if (e !== undefined)
+        {
+            e.stopPropagation();
+        }
+    };
+
+    $("#header-dropdown").click(toggleMenu);
+
+    $(window).click(function(){
+        menuVisible = false;
+        $("header").removeClass("active");
+        $("#header-dropdown").html("keyboard_arrow_down");
+    });
 });
 
 function submitPrescription()
