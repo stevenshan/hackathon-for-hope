@@ -8,9 +8,9 @@ export default class CameraScreen extends React.Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
   };
-
+  
   static navigationOptions = {
-    title: 'Camera',
+    header: null,
   };
 
   async componentWillMount() {
@@ -26,7 +26,7 @@ export default class CameraScreen extends React.Component {
 
   takePicture = () => {
     if (this.camera) {
-      this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
+      this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved, base64:true});
     }
     };
 
@@ -35,10 +35,17 @@ export default class CameraScreen extends React.Component {
       from: photo.uri,
       to: `${FileSystem.documentDirectory}photos/image.jpg`,
     });
+    fetch('https://automl.googleapis.com/v1beta1/projects/pennapps-2018-215815/locations/us-central1/models/ICN3028003079479263190:predict', {
+        method: 'POST',
+        body: photo.base64
+    }).then(response => console.log(response))
     this.setState({ newPhotos: true });
   }
 
   render() {
+    const automl = require('@google-cloud/automl');
+    const client = new automl.AutoMLClient();
+    const predCli = new automl.PredictionServiceClient();
     return (
           <Camera 
             ref = {ref => {this.camera = ref; }}
@@ -71,9 +78,13 @@ export default class CameraScreen extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
+                  position: 'absolute',
+                  bottom: 0,
                   flex: 0.2,
                   alignSelf: 'center',
+                  alignContent: 'center',
                   alignItems: 'center',
+                  marginLeft: 163
                 }}
                 onPress={() => {
                     this.takePicture();
@@ -98,5 +109,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     backgroundColor: '#fff',
+  },
+  takePhoto: {
+    marginLeft: 10
   },
 });
