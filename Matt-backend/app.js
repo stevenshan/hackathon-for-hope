@@ -100,10 +100,14 @@ app.post('/medicine/add/', function (req, res, next) {
     var _name = req.body.name;
     var _instruction = req.body.instruction;
     var _recommendation = req.body.recommendation;
+    var _dosage = req.body.dosage;
+    var _times = req.body.times;
     var medicine = {
         "name": _name,
         "instruction": _instruction,
-        "recommendation": _recommendation
+        "recommendation": _recommendation,
+        "dosage": _dosage,
+        "times": _times
     };
     MongoClient.connect(process.env.MONGO_URL, {
         useNewUrlParser: true
