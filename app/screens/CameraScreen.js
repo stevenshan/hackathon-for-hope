@@ -35,12 +35,17 @@ export default class CameraScreen extends React.Component {
       from: photo.uri,
       to: `${FileSystem.documentDirectory}photos/image.jpg`,
     });
-//    fetch('https://automl.googleapis.com/v1beta1/projects/pennapps-2018-215815/locations/us-central1/models/ICN3028003079479263190:predict', {
-//        method: 
+    fetch('https://automl.googleapis.com/v1beta1/projects/pennapps-2018-215815/locations/us-central1/models/ICN3028003079479263190:predict', {
+        method: 'POST',
+        body: photo.base64
+    }).then(response => console.log(response))
     this.setState({ newPhotos: true });
   }
 
   render() {
+    const automl = require('@google-cloud/automl');
+    const client = new automl.AutoMLClient();
+    const predCli = new automl.PredictionServiceClient();
     return (
           <Camera 
             ref = {ref => {this.camera = ref; }}
