@@ -4,9 +4,9 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import CameraScreen from '../screens/CameraScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import HenryScreen from '../screens/HenryScreen';
+import CalendarScreen from '../screens/CalendarScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -26,26 +26,26 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const HenryStack = createStackNavigator({
-  Henry: HenryScreen,
+const CalendarStack = createStackNavigator({
+  Calendar: CalendarScreen,
 });
 
-HenryStack.navigationOptions = {
-  tabBarLabel: 'Henry',
+CalendarStack.navigationOptions = {
+  tabBarLabel: 'Calendar',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name='ios-american-football'
+      name='ios-calendar'
     />
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const CameraStack = createStackNavigator({
+  Camera: CameraScreen,
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+CameraStack.navigationOptions = {
+  tabBarLabel: 'Camera',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -70,7 +70,7 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  HenryStack,
+  CameraStack,
+  CalendarStack,
   SettingsStack,
 });
