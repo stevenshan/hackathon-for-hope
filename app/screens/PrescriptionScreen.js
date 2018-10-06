@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 
 export default class MedicationScreen extends React.Component {
@@ -9,9 +9,9 @@ export default class MedicationScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <Text> Edit me Rebecca </Text>
-      </ScrollView>
+      </View>
     );
   }
 }

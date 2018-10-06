@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View} from 'react-native';
 
 export default class AchievementScreen extends React.Component {
   static navigationOptions = {
@@ -12,7 +12,7 @@ export default class AchievementScreen extends React.Component {
     return (
     	<View>
             <Text> achievements spelled right </Text>);
-        </View>
-
+      </View>
+    )
   }
 }
