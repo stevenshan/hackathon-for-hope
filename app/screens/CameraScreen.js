@@ -76,6 +76,8 @@ class CameraScreen extends React.Component {
               }}>
               <TouchableOpacity
                 style={{
+                  marginLeft: 10,
+                  marginTop: 15,
                   flex: 0.1,
                   alignSelf: 'flex-start',
                   alignItems: 'center',
