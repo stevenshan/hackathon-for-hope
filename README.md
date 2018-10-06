@@ -2,8 +2,10 @@
 
 ## REST interface
 
-#### Patient information
+### Patient information
 
 /patients/lastname/firstname
 
-e.g. /patients/lang/manuel
+e.g. [https://hackthishelpkids-matt.appspot.com/patients/lang/manuel](https://hackthishelpkids-matt.appspot.com/patients/lang/manuel)
+
+
