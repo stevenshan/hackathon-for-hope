@@ -58,8 +58,9 @@ const styles = StyleSheet.create({
   },
   Pet:{
     alignSelf: 'center',
-    width: 600,
-    height: 300,
+    width: 300,
+    height: 450,
+    resizeMode:'stretch'
   },
   header: {
     fontFamily: 'Brandon_bld',
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     color: 'rgba(181,234,208,1)',
-    marginTop: 110
+    marginTop: 50
   },
   containerTop: {
     justifyContent: 'center',
