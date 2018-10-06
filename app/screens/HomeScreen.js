@@ -26,27 +26,24 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <ImageBackground source={require('../assets/images/wallpaper2.jpg')}
-      resizeMode='cover'
-      style={styles.backgroundImage}
-      >
+      <View style={styles.background}>
         <View style={styles.background}> 
-          <Text style={styles.header}> Hello Johnny </Text>
+          <Text style={styles.header}> Feed Matt </Text>
           <Text style={styles.text}> Your next medicine to take is: </Text>
           <Text style={styles.text}> Augmentin </Text>
-          <Text style={styles.text}> in 20 minutes </Text>
-          <Text style={styles.text}> Click on Matt to feed him! </Text>
+          <Text style={styles.text}> in 0 minutes </Text>
         </View>
+          <Text style={styles.text}> Click me to feed me! </Text>
           <TouchableOpacity
               onPress={() => {
                   this.props.navigation.navigate('CameraStack')
               }}>
-                  <Image source={require('../assets/images/dog.png')}
+                  <Image source={require('../assets/images/cutedog.png')}
                   resizeMode= 'center'
                   style={styles.Pet}
                   />
             </TouchableOpacity>
-      </ImageBackground>
+      </View>
     );
   }
 }
@@ -61,17 +58,17 @@ const styles = StyleSheet.create({
   },
   Pet:{
     alignSelf: 'center',
+
   },
   header: {
     fontFamily: 'Brandon_bld',
-    marginTop: 20,
+    marginTop: 10,
     fontSize: 30,
     textAlign: 'center',
     color: 'rgba(248,235,158,1)',
   },
   text: {
-    fontFamily: 'Brandon_bld',
-    marginTop: 5,
+    fontFamily: 'Brandon_reg',
     fontSize: 20,
     textAlign: 'center',
     color: 'rgba(181,234,208,1)',

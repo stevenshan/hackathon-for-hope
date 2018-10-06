@@ -1,9 +1,15 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, Button, TouchableOpacity} from 'react-native';
 
+Expo.Font.loadAsync({
+  'Brandon_bld': require('../assets/fonts/Brandon_bld.ttf'),
+  'Brandon_reg': require('../assets/fonts/Brandon_reg.ttf'),
+});
+
+
 export default class EncourageScreen extends React.Component {
   static navigationOptions = {
-    title: null,
+    title: 'I Wrov You Hooman',
   };
 
   render() {
@@ -11,7 +17,7 @@ export default class EncourageScreen extends React.Component {
      * content, we just wanted to give you a quick view of your config */
     return (
     	<View style={styles.background}>
-        <Image source={require('../assets/images/happydog.gif')}
+        <Image source={require('../assets/images/dogfood.gif')}
         resizeMode= 'center'
         style={styles.gif}
         />
@@ -21,12 +27,12 @@ export default class EncourageScreen extends React.Component {
           this.props.navigation.navigate('Badge')
         }}>
         </Button>
-        <Text> Thank you! Woof Woof </Text>
+        <Text style={styles.text}> Thank you! Woof Woof </Text>
         <TouchableOpacity
           onPress={() => {
               this.props.navigation.navigate('Badge')
           }}>
-              <Image source={require('../assets/images/dog.png')}
+              <Image source={require('../assets/images/yummy.png')}
               resizeMode= 'center'
               style={styles.Pet}
               />
@@ -40,6 +46,12 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: "rgba(76,76,76,1)",
   },
+  text: {
+    fontFamily: 'Brandon_reg',
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'rgba(181,234,208,1)',
+  },
   container: {
     flex: 1,
     paddingTop: 15,
@@ -52,8 +64,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   Pet:{
-    alignSelf: 'center',
-    height:200,
-    width:200,
+    height:300,
+    width:300,
   },
 });
