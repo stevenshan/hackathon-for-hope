@@ -33,7 +33,7 @@ export default class HomeScreen extends React.Component {
           <Text style={styles.text}> Augmentin </Text>
           <Text style={styles.text}> in 0 minutes </Text>
         </View>
-          <Text style={styles.text}> Click me to feed me! </Text>
+          <Text style={styles.text2}> Click me to feed me! </Text>
           <TouchableOpacity
               onPress={() => {
                   this.props.navigation.navigate('CameraStack')
@@ -58,12 +58,14 @@ const styles = StyleSheet.create({
   },
   Pet:{
     alignSelf: 'center',
-
+    width: 600,
+    height: 300,
   },
   header: {
     fontFamily: 'Brandon_bld',
-    marginTop: 10,
-    fontSize: 30,
+    marginTop: 30,
+    marginBottom: 20,
+    fontSize: 40,
     textAlign: 'center',
     color: 'rgba(248,235,158,1)',
   },
@@ -72,6 +74,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     color: 'rgba(181,234,208,1)',
+  },
+  text2: {
+    fontFamily: 'Brandon_reg',
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'rgba(181,234,208,1)',
+    marginTop: 110
   },
   containerTop: {
     justifyContent: 'center',

@@ -33,10 +33,6 @@ export default class BadgeScreen extends React.Component {
         resizeMode= 'center'
         style={styles.gif}
         />
-        <Image source={require('../assets/images/bear.gif')}
-        resizeMode= 'center'
-        style={styles.gif}
-        />
       </ScrollView>
     )
   }
