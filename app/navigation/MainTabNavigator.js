@@ -55,7 +55,7 @@ const PrescriptionStack = createStackNavigator({
 });
 
 PrescriptionStack.navigationOptions = {
-  tabBarLabel: 'Prescription',
+  tabBarLabel: 'Prescriptions',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
