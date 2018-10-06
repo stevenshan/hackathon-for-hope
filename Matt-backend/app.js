@@ -117,7 +117,7 @@ app.post('/patients/:lastname/:firstname/deleteprescription', function (req, res
         }, function (err, patient) {
             if (err) return console.log(err);
             async.forEach(patient.medicine, function (med, callback) {
-                if (med.name == req.body.name) {
+                if (med._id == req.body._id) {
                     console.log("found");
                     patient.medicine.pop(med);
                     callback();
@@ -155,7 +155,8 @@ app.post('/patients/:lastname/:firstname/updateprescription', function (req, res
         }, function (err, patient) {
             if (err) return console.log(err);
             async.forEach(patient.medicine, function (med, callback) {
-                if (med.name == req.body.name) {
+                if (med._id == req.body._id) {
+                    med.name = req.body.name;
                     med.instruction = req.body.instruction;
                     med.recommendation = req.body.recommendation;
                     med.days = req.body.days;
