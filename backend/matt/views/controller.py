@@ -43,7 +43,7 @@ def __user():
 
     today = (datetime.datetime.today().weekday() + 1) % 7
 
-    def _map(x):
+    for x in medicines:
         days = str(x["days"]).split(",")
         if str(today) in days:
             dt = datetime.datetime.today()
@@ -63,8 +63,6 @@ def __user():
                 }
 
                 _medicines.append(result)
-
-    map(_map, medicines)
 
     return jsonify(_medicines)
 
