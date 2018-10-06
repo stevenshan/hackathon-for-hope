@@ -78,6 +78,22 @@ app.post('/patients/add', function (req, res, next) {
     res.send("Done");
 });
 
+app.get('/medicine', function(req, res, next) {
+    MongoClient.connect(process.env.MONGO_URL, {
+        useNewUrlParser: true
+    }, (err, db) => {
+        if (err) {
+            return console.log(err);
+        }
+        var dbo = db.db("mattdb");
+        dbo.collection("medicine").find({}).toArray(function(err, result) {
+            if (err) throw err;
+            db.close();
+            res.send(result);
+        });
+    });
+});
+
 app.get('/medicine/:name', function (req, res, next) {
     let medicine = req.params.name;
     MongoClient.connect(process.env.MONGO_URL, {
