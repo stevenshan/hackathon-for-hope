@@ -10,9 +10,13 @@
         <link href="{{ url_for('static', filename='css/calendar.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ url_for('static', filename='css/general.css') }}" rel="stylesheet" type="text/css">
 
+        <script type="text/javascript">
+            var MEDICINES = {{ medicines|safe }}
+        </script>
+
         <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}" type="text/javascript"></script>
-        <script src="{{ url_for('static', filename='js/scheduler.js') }}" type="text/javascript"></script>
         <script src="{{ url_for('static', filename='js/general.js') }}" type="text/javascript"></script>
+        <script src="{{ url_for('static', filename='js/scheduler.js') }}" type="text/javascript"></script>
     </head>
     <body>
         <header>
@@ -40,31 +44,54 @@
                 </div>
 
                 <section id="prescription-list" class="pane-content">
-                    <div class="item">
-                        <div class="item-title">Parallel and Sequential Data Structures</div>
-                        <div class="item-times">30 times a day until October 6, 2018</div>
-                        <div class="item-notes">
-                            Fail this stupid midterm and kill myself.
-                        </div>
-                    </div>
                 </section>
 
                 <section id="prescription-new" class="pane-content">
-                    <label class="text-input">
-                        <input type="text" placeholder=" ">
-                        <span>test</span>
-                    </label>
 
-                    <label class="text-input">
-                        <textarea placeholder=" "></textarea>
-                        <span>123</span>
-                    </label>
+                    <div id="prescription-templates" class="select-input">
+                        <div class="select-input-title">
+                            Template: <span></span>
+                        </div>
+                        <div class="select-input-menu"></div>
+                    </div>
 
-                    <label class="number-input">
-                        <input type="number" min="1" max="9" step="1" value="1">
-                    </label>
+                    <br>
 
-                    <button class="button-input">test</button>
+                    <form id="prescription-form" method="post">
+                        <label class="text-input">
+                            <input type="text" name="name" placeholder=" " required>
+                            <span>Prescription Name</span>
+                        </label>
+
+                        <label class="text-input">
+                            <input type="text" name="dosage" placeholder="ex. 100 mg">
+                            <span>Dosage</span>
+                        </label>
+
+                        <label class="text-input">
+                            <textarea name="instructions" placeholder="ex. swallow after dinner"></textarea>
+                            <span>Instructions</span>
+                        </label>
+
+                        <label class="text-input">
+                            <textarea name="recommendation" placeholder="ex. eat with candy"></textarea>
+                            <span>Recommendation</span>
+                        </label>
+
+                        <label class="text-input">
+                            <input type="text" name="days" placeholder="ex. Monday, Tuesday">
+                            <span>Days</span>
+                        </label>
+
+                        <label class="text-input">
+                            <input type="text" name="times" placeholder="ex. 1pm, 12pm">
+                            <span>Time of Day</span>
+                        </label>
+                    </form>
+
+                    <br>
+
+                    <button class="button-input" onclick="submitPrescription()">Create Prescription</button>
                 </section>
 
             </section>

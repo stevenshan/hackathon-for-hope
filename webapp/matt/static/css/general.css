@@ -92,8 +92,10 @@ input[type=number]
 .text-input input:placeholder-shown + span,
 .text-input textarea:placeholder-shown + span {
     left: 10px;
-    top: 18px;
+    top: 20px;
     font-size: 16px;
+    width: 90%;
+    color: #515151;
 }
 
 .text-input span,
@@ -107,9 +109,12 @@ input[type=number]
     line-height: 15px;
     background: #ffffff;
     padding: 0px 5px;
+    padding-bottom: 1px;
     left: 10px; 
     top: 0px;
     transition: top 0.2s;
+    width: initial;
+    color: #000000;
 }
 
 .text-input input,
@@ -129,11 +134,73 @@ input[type=number]
 
 .text-input textarea {
     resize: vertical;
+    height: 150px;
 }
 
 .text-input input:focus,
 .text-input textarea:focus {
     border: 1px solid #2b5fe2;
+}
+
+.select-input {
+    display: block;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    height: 42px;
+    margin: 5px 0px;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+    background: #fbfbfb;
+}
+
+.select-input .select-input-title {
+    line-height: 42px;
+    padding: 0px 15px;
+    font-weight: 200;
+}
+
+.select-input .select-input-title > span {
+    font-weight: 600;
+}
+
+.select-input .select-input-menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background: #f8f8f8;
+    border: 1px solid #2b5fe2;
+    left: -1px;
+    top: 100%;
+    width: 100%;
+    border-radius: 0px 0px 4px 4px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.select-input .select-input-menu input {
+    display: none;
+}
+
+.select-input .select-input-menu label {
+    display: block;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.select-input .select-input-menu label:hover,
+.select-input .select-input-menu input:checked + label {
+    background: #eeeeee;
+}
+
+.select-input.active {
+    border-color: #2b5fe2;
+    border-radius: 4px 4px 0px 0px;
+}
+
+.select-input.active .select-input-menu {
+    display: initial;
 }
 
 .button-input {
@@ -144,7 +211,7 @@ input[type=number]
     border-radius: 4px;
     padding: 10px 20px;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 15px;
     cursor: pointer;
     transition: background 0.1s;
     margin: 5px 0px;
