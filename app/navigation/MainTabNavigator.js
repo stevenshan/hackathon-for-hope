@@ -5,9 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import CameraStack from '../screens/CameraScreen';
-//import EncourageScreen from '../screens/EncourageScreen';
 import PrescriptionScreen from '../screens/PrescriptionScreen';
-import InstructionScreen from '../screens/InstructionScreen';
 import CalendarScreen from '../screens/CalendarScreen';
 
 
@@ -61,24 +59,9 @@ PrescriptionStack.navigationOptions = {
   ),
 };
 
-const InstructionStack = createStackNavigator({
-  Instruction: InstructionScreen,
-});
-
-InstructionStack.navigationOptions = {
-  tabBarLabel: 'Instructions',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
-    />
-  ),
-};
-
 export default createBottomTabNavigator({
   HomeStack,
   CameraStack,
   PrescriptionStack,
-  InstructionStack,
   CalendarStack,
 });
