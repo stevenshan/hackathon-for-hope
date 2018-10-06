@@ -7,18 +7,18 @@ export default class MedicationScreen extends React.Component {
     title: 'Prescription',
   };
   state = {
-      medicines:[]
-  }
-
-  componentDidMount() {
-    fetch('http://hackthishelpkids-matt.appspot.com/medicine')
-      .then((response) => { console.log(response.body); this.setState({ medicines: response.body})})
-  }
-  render() {
-    productList = [];
-    console.log(this.state.medicines)
-    this.state.medicines.map(function(object,i) {
-       console.log(object);
+      medicines:[],
+      formatted:[]
+  };
+  productList =[];
+componentDidMount() {
+     fetch('http://hackthishelpkids-matt.appspot.com/medicine', {
+        method: 'GET'
+    })
+      .then((response) => response.json())
+     .then((responseJson) => { this.setState({ medicines: responseJson})
+         console.log(responseJson);
+       this.state.medicines.map(function(object,i) {
        productList.push(
            <View>
        <Text>Name: {object['name']}</Text>
@@ -26,9 +26,14 @@ export default class MedicationScreen extends React.Component {
        <Text>Dosage: {object['dosage']}</Text>
            </View>
        );
-    });
+        });
+      })
  
-    return (
+}
+
+
+ render() {
+   return (
      <View style={styles.container}>
         <Text>{productList} </Text>
     </View>
