@@ -55,8 +55,17 @@ app.get('/patients/:lastname/:firstname', function (req, res, next) {
         }, function (err, result) {
             if (err) return console.log(err);
             let patient = result;
-            db.close();
-            res.send(patient);
+            async.forEach(patient.medicine, function (med, callback) {
+                dbo.collection("medicine").findOne({
+                    name: med.name,
+                }, function (err, result) {
+                    med._id = result._id;
+                    callback();
+                });
+            }, function (err) {
+                db.close();
+                res.send(patient);
+            });
         });
     });
 });
@@ -117,7 +126,7 @@ app.post('/patients/:lastname/:firstname/deleteprescription', function (req, res
         }, function (err, patient) {
             if (err) return console.log(err);
             async.forEach(patient.medicine, function (med, callback) {
-                if (med._id == req.body._id) {
+                if (med.name == req.body.name) {
                     console.log("found");
                     patient.medicine.pop(med);
                     callback();
@@ -138,6 +147,7 @@ app.post('/patients/:lastname/:firstname/deleteprescription', function (req, res
     });
 });
 
+
 app.post('/patients/:lastname/:firstname/updateprescription', function (req, res, next) {
     console.log(req.body);
     var first_name = req.params.firstname;
@@ -155,8 +165,7 @@ app.post('/patients/:lastname/:firstname/updateprescription', function (req, res
         }, function (err, patient) {
             if (err) return console.log(err);
             async.forEach(patient.medicine, function (med, callback) {
-                if (med._id == req.body._id) {
-                    med.name = req.body.name;
+                if (med.name == req.body.name) {
                     med.instruction = req.body.instruction;
                     med.recommendation = req.body.recommendation;
                     med.days = req.body.days;
