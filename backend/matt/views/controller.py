@@ -30,6 +30,10 @@ def _getUser():
 def _user():
     return jsonify(_getUser())
 
+@views.route("/test", methods=["GET"])
+def __test():
+    return str(datetime.datetime.today())
+
 @views.route("/rebecca", methods=["GET"])
 def __user():
     user = _getUser()

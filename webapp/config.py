@@ -7,7 +7,7 @@ class Config:
 
     #DB_URL = "http://hackthishelpkids-matt.appspot.com"
     #DB_URL = "http://128.237.165.133:8080"
-    DB_URL = "http://localhost:5123"
+    DB_URL = "https://hackathon-for-hope.herokuapp.com"
 
     DB_URI = "/steven"
 
