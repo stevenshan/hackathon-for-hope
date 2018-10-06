@@ -37,14 +37,15 @@ def _update():
 
 @controller.route("/delete", methods=["POST"])
 def _delete():
-    _id = flask.request.form["_id"] 
+    form = {x: flask.request.form[x] for x in flask.request.form}
 
     DB_URL = app.config.get("DB_URL")
     DB_URI = app.config.get("DB_URI")
     response = requests.post(DB_URL + DB_URI + "/deleteprescription",
-                  data = {"_id": _id})
+                  data = form)
 
     if response.status_code != 200:
+        print(response.status_code)
         raise ValueError("Received bad status code")
 
     return "good"
@@ -98,7 +99,7 @@ def createOrUpdate(endpoint):
 
     _id = str(uuid.uuid4())
     prescription = {
-        "_id": _id,
+        "_id": flask.request.form.get("_id", _id),
         "name": flask.request.form["name"],
         "instruction": flask.request.form["instructions"],
         "recommendation": flask.request.form["recommendation"],
