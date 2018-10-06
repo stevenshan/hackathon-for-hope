@@ -4,7 +4,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import CameraScreen from '../screens/CameraScreen';
+import CameraStack from '../screens/CameraScreen';
+//import EncourageScreen from '../screens/EncourageScreen';
 import PrescriptionScreen from '../screens/PrescriptionScreen';
 import InstructionScreen from '../screens/InstructionScreen';
 import CalendarScreen from '../screens/CalendarScreen';
@@ -38,20 +39,6 @@ CalendarStack.navigationOptions = {
     <TabBarIcon
       focused={focused}
       name='ios-calendar'
-    />
-  ),
-};
-
-const CameraStack = createStackNavigator({
-  Camera: CameraScreen,
-});
-
-CameraStack.navigationOptions = {
-  tabBarLabel: 'Camera',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
     />
   ),
 };
