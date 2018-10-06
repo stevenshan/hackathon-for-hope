@@ -1,3 +1,4 @@
+const async = require("async");
 const bodyParser = require('body-parser')
 const chalk = require('chalk');
 const express = require('express');
@@ -37,15 +38,21 @@ app.get('/patients/:lastname/:firstname', function (req, res, next) {
             lastname: last_name
         }, function (err, result) {
             if (err) return console.log(err);
-            patient = result;
-            dbo.collection("medicine").findOne({
-                name: patient.medicine
-            }, function (err, result) {
-                console.log(result);
-                patient.medicine = result;
+            let med = result.medicine + '';
+            let patient = result;
+            patient.medicine = [];
+            async.each(med.split(","), function(med, callback) {
+                dbo.collection("medicine").findOne({
+                    name: med
+                }, function(err,med) {
+                    if (med) 
+                        patient.medicine.push(med);
+                    callback(err);
+                });
+            }, function(err) {
                 db.close();
-                res.send(patient);    
-            }); 
+                res.send(patient); 
+            });         
         });
     });
 });

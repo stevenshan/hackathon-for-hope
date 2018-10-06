@@ -4,12 +4,14 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
+    "xyz": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.1",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "dotenv": "^6.0.0",
