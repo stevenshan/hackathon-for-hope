@@ -85,3 +85,6 @@ header #patient-name #patient-first-name {
     z-index: 1;
 }
 
+#prescription-update .button-input {
+    display: inline-block;
+}

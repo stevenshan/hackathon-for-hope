@@ -10,16 +10,46 @@ def index():
 
     # get medicines
     DB_URL = app.config.get("DB_URL")
+    DB_URI = app.config.get("DB_URI")
 
     medicines = requests.get(DB_URL + "/medicine").text
+    userReq = requests.get(DB_URL + DB_URI)
+    active = userReq.text
+    _active = json.loads(active)
 
-    return flask.render_template("scheduler.html", medicines=medicines)
+    return flask.render_template(
+        "scheduler.html",
+        medicines=medicines,
+        prescriptions=active,
+        firstname=_active["firstname"].capitalize(),
+        lastname=_active["lastname"].capitalize(),
+    )
 
 DAYS = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
 
 @controller.route("/", methods=["POST"])
 def _index():
+    return createOrUpdate("/addprescription")
 
+@controller.route("/update", methods=["POST"])
+def _update():
+    return createOrUpdate("/updateprescription")
+
+@controller.route("/delete", methods=["POST"])
+def _delete():
+    _id = flask.request.form["_id"] 
+
+    DB_URL = app.config.get("DB_URL")
+    DB_URI = app.config.get("DB_URI")
+    response = requests.post(DB_URL + DB_URI + "/deleteprescription",
+                  data = {"_id": _id})
+
+    if response.status_code != 200:
+        raise ValueError("Received bad status code")
+
+    return "good"
+
+def createOrUpdate(endpoint):
     days = str(flask.request.form["days"]).lower().split(",")
     _days = set()
     for day in days:
@@ -80,11 +110,13 @@ def _index():
     if prescription["name"].strip(" ") == "":
         raise ValueError("Prescription needs a name.")
 
-    # DB_URL = app.config.get("DB_URL")
-    # response = requests.post(DB_URL + "/patients/lang/manuel/addprescription",
-    #               data = prescription)
+    DB_URL = app.config.get("DB_URL")
+    DB_URI = app.config.get("DB_URI")
+    response = requests.post(DB_URL + DB_URI + endpoint,
+                  data = prescription)
 
-    # if response.status_code != 200:
-    #     raise ValueError("Received bad status code")
+    if response.status_code != 200:
+        raise ValueError("Received bad status code")
 
     return json.dumps(prescription)
+

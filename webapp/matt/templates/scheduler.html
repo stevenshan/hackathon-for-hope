@@ -11,7 +11,8 @@
         <link href="{{ url_for('static', filename='css/general.css') }}" rel="stylesheet" type="text/css">
 
         <script type="text/javascript">
-            var MEDICINES = {{ medicines|safe }}
+            var MEDICINES = {{ medicines|safe }};
+            var PRESCRIPTIONS = {{ prescriptions|safe }};
         </script>
 
         <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}" type="text/javascript"></script>
@@ -21,8 +22,8 @@
     <body>
         <header>
             <div id="patient-name">
-                <span id="patient-first-name">Steven</span>
-                <span id="patient-last-name">Shan</span>
+                <span id="patient-first-name">{{ firstname }}</span>
+                <span id="patient-last-name">{{ lastname }}</span>
             </div>
         </header>
 
@@ -40,10 +41,17 @@
                             <i class="material-icons">add</i>
                             Add Prescription
                         </div>
+                        <div id="update-prescription-button" class="button" onclick="showPrescriptionList()">
+                            <i class="material-icons">close</i>
+                            Cancel Changes
+                        </div>
                     </div>
                 </div>
 
                 <section id="prescription-list" class="pane-content">
+                    <div id="no-prescriptions-warning">
+                        This user has no prescriptions.
+                    </div>
                 </section>
 
                 <section id="prescription-new" class="pane-content">
@@ -92,6 +100,17 @@
                     <br>
 
                     <button class="button-input" onclick="submitPrescription()">Create Prescription</button>
+                </section>
+
+                <section id="prescription-update" class="pane-content">
+                    <form id="prescription-update-form">
+                        <input type="hidden" name="_id">
+                    </form>
+
+                    <br>
+
+                    <button class="button-input" onclick="submitUpdate()">Update Prescription</button>
+                    <button class="delete button-input" onclick="deletePrescription()">Delete Prescription</button>
                 </section>
 
             </section>

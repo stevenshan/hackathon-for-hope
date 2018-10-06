@@ -221,11 +221,23 @@ input[type=number]
     background: #dee0ef;
 }
 
+#no-prescriptions-warning {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+}
+
 .item {
     border: 1px solid #e0e0e0;
     border-left: 3px solid #65db39;
     padding: 10px;
     margin: 15px 0px;
+    cursor: pointer;
+}
+
+.item:hover {
+    background: #f6f6f6;
 }
 
 .item .item-title {
@@ -250,4 +262,13 @@ input[type=number]
     margin-top: 10px;
     border-top: 1px solid #e0e0e0;
     padding-top: 10px;
+}
+
+.delete {
+    border-color: #b33a3a;
+    color: #b33a3a;
+}
+
+.delete:hover {
+    background: #efcece;
 }
