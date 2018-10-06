@@ -41,10 +41,20 @@ class CameraScreen extends React.Component {
       from: photo.uri,
       to: `${FileSystem.documentDirectory}photos/image.jpg`,
     });
-    fetch('https://automl.googleapis.com/v1beta1/projects/pennapps-2018-215815/locations/us-central1/models/ICN3028003079479263190:predict', {
-        method: 'POST',
-        body: photo.base64
-    }).then(response => console.log(response))
+    fetch("https://automl.googleapis.com/v1beta1/projects/pennapps-2018-215815/locations/us-central1/models/ICN3028003079479263190:predict", {
+      body: {
+        "payload": {
+          "image": {
+            "imageBytes": photo.base64
+          },
+        }
+      },
+      headers: {
+        Authorization: "Bearer $(gcloud auth application-default print-access-token)",
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    }).then(response => console.log(response));
     this.setState({ newPhotos: true });
   }
 
