@@ -116,18 +116,51 @@ app.post('/patients/:lastname/:firstname/deleteprescription', function (req, res
             lastname: last_name
         }, function (err, patient) {
             if (err) return console.log(err);
-            let medicine = {
-                "name": req.body.name,
-                "instruction": req.body.instruction,
-                "recommendation": req.body.recommendation,
-                "days": req.body.days,
-                "times": req.body.times,
-                "dosage": req.body.dosage
-            };
             async.forEach(patient.medicine, function (med, callback) {
-                if (med.name == req.body.name && med.instruction == req.body.instruction && med.recommendation == req.body.recommendation && med.days == req.body.days && med.times == req.body.times) {
+                if (med.name == req.body.name) {
                     console.log("found");
-                    patient.medicine.pop(medicine);
+                    patient.medicine.pop(med);
+                    callback();
+                }
+            }, function (err) {
+                dbo.collection("patients").updateOne({
+                    firstname: first_name,
+                    lastname: last_name
+                }, {
+                    $set: {
+                        "medicine": patient.medicine
+                    }
+                });
+                db.close();
+                res.send("Done");
+            });
+        });
+    });
+});
+
+app.post('/patients/:lastname/:firstname/updateprescription', function (req, res, next) {
+    console.log(req.body);
+    var first_name = req.params.firstname;
+    var last_name = req.params.lastname;
+    MongoClient.connect(process.env.MONGO_URL, {
+        useNewUrlParser: true
+    }, (err, db) => {
+        if (err) {
+            return console.log(err);
+        }
+        var dbo = db.db("mattdb");
+        dbo.collection("patients").findOne({
+            firstname: first_name,
+            lastname: last_name
+        }, function (err, patient) {
+            if (err) return console.log(err);
+            async.forEach(patient.medicine, function (med, callback) {
+                if (med.name == req.body.name) {
+                    med.instruction = req.body.instruction;
+                    med.recommendation = req.body.recommendation;
+                    med.days = req.body.days;
+                    med.times = req.body.times;
+                    med.dosage = req.body.dosage;
                     callback();
                 }
             }, function (err) {
