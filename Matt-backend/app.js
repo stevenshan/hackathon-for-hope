@@ -86,11 +86,14 @@ app.post('/patients/:lastname/:firstname/addprescription', function (req, res, n
                 "dosage": req.body.dosage
             };
             patient.medicine.push(medicine);
-            dbo.collection("patients").updateOne(
-                { firstname: first_name,
-                    lastname: last_name },
-                { $set: { "medicine" : patient.medicine } }
-             );
+            dbo.collection("patients").updateOne({
+                firstname: first_name,
+                lastname: last_name
+            }, {
+                $set: {
+                    "medicine": patient.medicine
+                }
+            });
             db.close();
             res.send("Done.");
         });
@@ -121,16 +124,24 @@ app.post('/patients/:lastname/:firstname/deleteprescription', function (req, res
                 "times": req.body.times,
                 "dosage": req.body.dosage
             };
-            console.log(medicine);
-            patient.medicine.pop(medicine);
-            dbo.collection("patients").updateOne(
-                { firstname: first_name,
-                    lastname: last_name },
-                { $set: { "medicine" : patient.medicine } }
-             );
-            console.log(patient);
-            db.close();
-            res.send("Done.");
+            async.forEach(patient.medicine, function (med, callback) {
+                if (med.name == req.body.name && med.instruction == req.body.instruction && med.recommendation == req.body.recommendation && med.days == req.body.days && med.times == req.body.times) {
+                    console.log("found");
+                    patient.medicine.pop(medicine);
+                    callback();
+                }
+            }, function (err) {
+                dbo.collection("patients").updateOne({
+                    firstname: first_name,
+                    lastname: last_name
+                }, {
+                    $set: {
+                        "medicine": patient.medicine
+                    }
+                });
+                db.close();
+                res.send("Done");
+            });
         });
     });
 });
