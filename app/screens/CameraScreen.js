@@ -1,9 +1,15 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Camera, Permissions, FileSystem } from 'expo';
 import { Icon } from 'react-native-elements';
+import EncourageScreen from './EncourageScreen';
+import BadgeScreen from './BadgeScreen';
+import { createStackNavigator} from 'react-navigation';
+import TabBarIcon from '../components/TabBarIcon';
 
-export default class CameraScreen extends React.Component {
+
+class CameraScreen extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
@@ -43,9 +49,9 @@ export default class CameraScreen extends React.Component {
   }
 
   render() {
-    const automl = require('@google-cloud/automl');
-    const client = new automl.AutoMLClient();
-    const predCli = new automl.PredictionServiceClient();
+    //const automl = require('@google-cloud/automl');
+    //const client = new automl.AutoMLClient();
+    //const predCli = new automl.PredictionServiceClient();
     return (
           <Camera 
             ref = {ref => {this.camera = ref; }}
@@ -88,7 +94,8 @@ export default class CameraScreen extends React.Component {
                 }}
                 onPress={() => {
                     this.takePicture();
-
+                    this.props.navigation.navigate("Encourage");
+                    console.log("navigated");
                 }}>
                     <Icon 
                         style = {styles.takePhoto} 
@@ -114,3 +121,25 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
 });
+
+const CameraStack = createStackNavigator({
+  Camera: CameraScreen,
+  Encourage: EncourageScreen,
+  Badge: BadgeScreen,
+});
+
+CameraStack.navigationOptions = {
+  tabBarLabel: 'Camera',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
+
+export default CameraStack;
