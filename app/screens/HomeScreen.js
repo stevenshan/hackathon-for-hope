@@ -6,7 +6,9 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableHighlight,
   View,
+  Alert,
 } from 'react-native';
 import { FileSystem } from 'expo';
 
@@ -16,10 +18,25 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-
   render() {
+      const { navigate } = this.props.navigation;
       var f = `${FileSystem.documentDirectory}photos/image.jpg`;
-      return (<Image style={{width: 100, height: 100 }} source = {{uri: f}}  /> 
+      return (
+
+          <View>
+          
+          <Image style={{width: 100, height: 100 }} source = {{uri: f}}  /> 
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+            <View style={styles.container}>
+                <TouchableHighlight onPress = {() => { console.log("asd"); navigate('Medication') }}>
+                    <View style={styles.button}>
+                    <Text>Next Medication</Text>
+                    </View>
+                </TouchableHighlight>
+            </View>
+
+        </ScrollView>
+          </View>
           
           
           );

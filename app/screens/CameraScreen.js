@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Camera, Permissions, FileSystem } from 'expo';
+import { Icon } from 'react-native-elements';
 
 export default class CameraScreen extends React.Component {
   state = {
@@ -51,7 +52,7 @@ export default class CameraScreen extends React.Component {
               <TouchableOpacity
                 style={{
                   flex: 0.1,
-                  alignSelf: 'flex-end',
+                  alignSelf: 'flex-start',
                   alignItems: 'center',
                 }}
                 onPress={() => {
@@ -61,25 +62,30 @@ export default class CameraScreen extends React.Component {
                       : Camera.Constants.Type.back,
                   });
                 }}>
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Flip{' '}
-                </Text>
+                <Icon
+                  name='ios-reverse-camera'
+                  type='ionicon'
+                  color='#ffffff'
+                  size={40}
+                />
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
+                  flex: 0.2,
+                  alignSelf: 'center',
                   alignItems: 'center',
                 }}
                 onPress={() => {
                     this.takePicture();
 
                 }}>
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Take Photo{' '}
-                </Text>
+                    <Icon 
+                        style = {styles.takePhoto} 
+                        name='ios-camera' 
+                        type='ionicon' 
+                        color='#ffffff'
+                        size={75}
+                    />
               </TouchableOpacity>
             </View>
           </Camera>

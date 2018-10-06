@@ -7,6 +7,25 @@ import HomeScreen from '../screens/HomeScreen';
 import CameraScreen from '../screens/CameraScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import CalendarScreen from '../screens/CalendarScreen';
+import MedicationScreen from '../screens/MedicationScreen';
+
+const MedicationStack = createStackNavigator({
+    Medication: MedicationScreen,
+});
+
+MedicationStack.navigationOptions = {
+  tabBarLabel: 'Medication',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -72,5 +91,6 @@ export default createBottomTabNavigator({
   HomeStack,
   CameraStack,
   CalendarStack,
+  MedicationStack,
   SettingsStack,
 });
