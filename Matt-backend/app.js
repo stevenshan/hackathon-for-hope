@@ -78,6 +78,22 @@ app.post('/patients/add', function (req, res, next) {
     res.send("Done");
 });
 
+app.get('/medicine', function(req, res, next) {
+    MongoClient.connect(process.env.MONGO_URL, {
+        useNewUrlParser: true
+    }, (err, db) => {
+        if (err) {
+            return console.log(err);
+        }
+        var dbo = db.db("mattdb");
+        dbo.collection("medicine").find({}).toArray(function(err, result) {
+            if (err) throw err;
+            db.close();
+            res.send(result);
+        });
+    });
+});
+
 app.get('/medicine/:name', function (req, res, next) {
     let medicine = req.params.name;
     MongoClient.connect(process.env.MONGO_URL, {
@@ -100,10 +116,14 @@ app.post('/medicine/add/', function (req, res, next) {
     var _name = req.body.name;
     var _instruction = req.body.instruction;
     var _recommendation = req.body.recommendation;
+    var _dosage = req.body.dosage;
+    var _times = req.body.times;
     var medicine = {
         "name": _name,
         "instruction": _instruction,
-        "recommendation": _recommendation
+        "recommendation": _recommendation,
+        "dosage": _dosage,
+        "times": _times
     };
     MongoClient.connect(process.env.MONGO_URL, {
         useNewUrlParser: true

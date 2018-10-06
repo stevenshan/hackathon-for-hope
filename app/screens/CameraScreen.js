@@ -26,7 +26,7 @@ export default class CameraScreen extends React.Component {
 
   takePicture = () => {
     if (this.camera) {
-      this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
+      this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved, base64:true});
     }
     };
 
@@ -35,6 +35,8 @@ export default class CameraScreen extends React.Component {
       from: photo.uri,
       to: `${FileSystem.documentDirectory}photos/image.jpg`,
     });
+//    fetch('https://automl.googleapis.com/v1beta1/projects/pennapps-2018-215815/locations/us-central1/models/ICN3028003079479263190:predict', {
+//        method: 
     this.setState({ newPhotos: true });
   }
 
@@ -71,9 +73,13 @@ export default class CameraScreen extends React.Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
+                  position: 'absolute',
+                  bottom: 0,
                   flex: 0.2,
                   alignSelf: 'center',
+                  alignContent: 'center',
                   alignItems: 'center',
+                  marginLeft: 163
                 }}
                 onPress={() => {
                     this.takePicture();
@@ -98,5 +104,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     backgroundColor: '#fff',
+  },
+  takePhoto: {
+    marginLeft: 10
   },
 });
