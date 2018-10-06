@@ -1,5 +1,6 @@
+import flask
 from . import controller
 
 @controller.route("/", methods=["GET"])
-def test():
-    return "Test"
+def index():
+    return flask.render_template("scheduler.html")

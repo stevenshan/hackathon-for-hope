@@ -1,0 +1,77 @@
+<!doctype HTML>
+<html>
+    <head>
+        <title>Prescription Scheduler</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,600,700,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename='css/scheduler.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ url_for('static', filename='css/calendar.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ url_for('static', filename='css/general.css') }}" rel="stylesheet" type="text/css">
+
+        <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}" type="text/javascript"></script>
+        <script src="{{ url_for('static', filename='js/scheduler.js') }}" type="text/javascript"></script>
+        <script src="{{ url_for('static', filename='js/general.js') }}" type="text/javascript"></script>
+    </head>
+    <body>
+        <header>
+            <div id="patient-name">
+                <span id="patient-first-name">Steven</span>
+                <span id="patient-last-name">Shan</span>
+            </div>
+        </header>
+
+        <section id="panes">
+            <section id="left-pane">
+
+                <div id="panes-header">
+                    <div id="panes-title"></div>
+                    <div id="panes-header-buttons">
+                        <div id="cancel-new-prescription" class="button" onclick="showPrescriptionList()">
+                            <i class="material-icons">close</i>
+                            Cancel Prescription
+                        </div>
+                        <div id="new-prescription-button" class="button" onclick="showNewPrescriptionForm()">
+                            <i class="material-icons">add</i>
+                            Add Prescription
+                        </div>
+                    </div>
+                </div>
+
+                <section id="prescription-list" class="pane-content">
+                    <div class="item">
+                        <div class="item-title">Parallel and Sequential Data Structures</div>
+                        <div class="item-times">30 times a day until October 6, 2018</div>
+                        <div class="item-notes">
+                            Fail this stupid midterm and kill myself.
+                        </div>
+                    </div>
+                </section>
+
+                <section id="prescription-new" class="pane-content">
+                    <label class="text-input">
+                        <input type="text" placeholder=" ">
+                        <span>test</span>
+                    </label>
+
+                    <label class="text-input">
+                        <textarea placeholder=" "></textarea>
+                        <span>123</span>
+                    </label>
+
+                    <label class="number-input">
+                        <input type="number" min="1" max="9" step="1" value="1">
+                    </label>
+
+                    <button class="button-input">test</button>
+                </section>
+
+            </section>
+
+            <section id="right-pane">
+            </section>
+        </section>
+
+    </body>
+</html>

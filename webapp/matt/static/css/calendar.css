@@ -1,0 +1,42 @@
+.row .cell {
+    display: inline-block;
+}
+
+.row {
+    padding-top: 1px;
+    box-sizing: border-box;
+    height: 5.55%; 
+}
+
+.cell {
+    width: 11.5%;
+    height: 100%;
+    vertical-align: bottom;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.row:last-child .cell {
+    border-bottom: 0px;
+}
+
+.cell:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 3px;
+    height: 100%;
+}
+
+.cell:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.day-index {
+    width: 19.5%;
+    font-size: 12px;
+    text-align: right;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+
