@@ -13,8 +13,10 @@ def create_app():
 
     with app.app_context():
         from matt.views.controller import views
+        from matt.mod_backend.controller import mod_backend
 
         app.register_blueprint(views)
+        app.register_blueprint(mod_backend)
 
         app.redis = redis.from_url(
             app.config["REDIS_URL"],

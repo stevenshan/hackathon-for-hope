@@ -4,7 +4,7 @@ from flask import current_app as app
 import redis
 import uuid
 import datetime
-from . import controller
+from matt.mod_backend import controller
 
 @controller.route("/medicine", methods=["GET"])
 def _medicine():

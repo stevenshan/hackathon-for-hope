@@ -1,9 +1,9 @@
 import flask
 from flask import current_app as app
-from . import controller
 import requests
 import json
 import uuid
+from matt.views import controller
 
 @controller.route("/", methods=["GET"])
 def index():

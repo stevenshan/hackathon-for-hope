@@ -1,3 +1,1 @@
-import scheduler
-
-import api
+from matt.views import scheduler
